@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_calculate">
+
+    <fragment
+        android:id="@+id/navigation_calculate"
+        android:name="az.squareroot.customstaxescalc.ui.calculate.CalculateFragment"
+        android:label="@string/title_calculate"
+        tools:layout="@layout/fragment_calculate">
+        <action
+            android:id="@+id/action_navigation_calculate_to_navigation_rules"
+            app:destination="@id/navigation_rules" />
+        <action
+            android:id="@+id/action_navigation_calculate_to_navigation_settings"
+            app:destination="@id/navigation_settings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_history"
+        android:name="az.squareroot.customstaxescalc.ui.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/navigation_carriers"
+        android:name="az.squareroot.customstaxescalc.ui.carriers.CarriersFragment"
+        android:label="@string/title_carriers"
+        tools:layout="@layout/fragment_carriers" />
+
+    <fragment
+        android:id="@+id/navigation_rules"
+        android:name="az.squareroot.customstaxescalc.ui.taxes.TaxesFragment"
+        android:label="@string/title_rules"
+        tools:layout="@layout/fragment_taxes" />
+
+    <fragment
+        android:id="@+id/navigation_saved"
+        android:name="az.squareroot.customstaxescalc.ui.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" />
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="az.squareroot.customstaxescalc.ui.settings.SettingsFragment"
+        android:label="@string/title_settings" />
+
+</navigation>

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="carrier"
+            type="az.squareroot.customstaxescalc.database.datastructure.Carrier" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.calculate.CalculateFragment">
+
+        <include
+            android:id="@+id/toolbar_calculate"
+            layout="@layout/toolbar_calculate" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar_calculate">
+
+            <LinearLayout
+                android:id="@+id/layout_linear_calculate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_item_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/label_hint_item_price"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100"
+                    app:errorEnabled="true"
+                    app:prefixText="$  "
+                    app:prefixTextAppearance="@style/TextAppearance.AppCompat.Large">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_text_item_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_item_weight"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/label_hint_item_weight"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100"
+                    app:errorEnabled="true"
+                    app:prefixText="Kg  "
+                    app:prefixTextAppearance="@style/TextAppearance.AppCompat.Large">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_text_item_weight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="15dp">
+
+                    <net.colindodd.gradientlayout.GradientRelativeLayout
+                        android:id="@+id/card_view_carrier"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="16dp"
+                        app:bindColor="@{carrier}"
+                        app:end_color="@color/black"
+                        app:orientation="RIGHT_LEFT"
+                        app:start_color="@color/black">
+
+                        <ImageView
+                            android:id="@+id/image_carrier"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_alignTop="@id/label_carrier_name"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:contentDescription="@string/description_carrier_image"
+                            app:bindImage="@{carrier}" />
+
+                        <TextView
+                            android:id="@+id/label_carrier_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toStartOf="@id/image_carrier"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@{carrier.name}"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="@dimen/label_carrier_name_size"
+                            android:textStyle="bold"
+                            tools:text="@string/title_carriers" />
+
+                        <TextView
+                            android:id="@+id/label_carrier_name_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_toStartOf="@id/image_carrier"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/title_carriers"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="28sp"
+                            android:textStyle="bold"
+                            android:visibility="gone"
+                            app:bindVisibility="@{carrier}" />
+
+                        <TextView
+                            android:id="@+id/label_carrier_message_placeholder"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_carrier_name"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/label_carrier_message_placeholder"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:bindVisibility="@{carrier}" />
+
+                        <TextView
+                            android:id="@+id/label_carrier_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_carrier_name"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/image_carrier"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="16sp"
+                            android:visibility="gone"
+                            app:bindPrice="@{carrier}"
+                            tools:text="Price: 1.99$ - 5.99$" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/label_carrier_price"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/image_carrier"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="16sp"
+                            android:visibility="gone"
+                            app:bindWarehouses="@{carrier}"
+                            tools:text="Warehouses: Baku, Ganja, Barda" />
+
+                    </net.colindodd.gradientlayout.GradientRelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_cargo_price"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/label_hint_cargo_price"
+                    android:visibility="gone"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100"
+                    app:errorEnabled="true"
+                    app:prefixText="$  "
+                    app:prefixTextAppearance="@style/TextAppearance.AppCompat.Large">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_text_cargo_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <CheckBox
+                    android:id="@+id/checkbox_limit_used"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:checked="false"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:saveEnabled="false"
+                    android:text="@string/label_checkbox_limit"
+                    android:textSize="16sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/input_layout_used_limit"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:hint="@string/label_hint_used_limit"
+                    android:visibility="gone"
+                    app:boxStrokeWidth="2dp"
+                    app:boxStrokeWidthFocused="3dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="100"
+                    app:errorEnabled="true"
+                    app:prefixText="$  "
+                    app:prefixTextAppearance="@style/TextAppearance.AppCompat.Large">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_text_used_limit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="numberDecimal"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox_limit_used_fully"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:checked="false"
+                    android:fontFamily="@font/quicksand_medium"
+                    android:saveEnabled="false"
+                    android:text="@string/label_checkbox_limit_fully"
+                    android:textSize="16sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_view_taxes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:elevation="4dp"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/gradient_primary"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/label_tax_and_customs_payments"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/label_vat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:text="@string/label_vat"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="20sp"
+                            tools:text="VAT: 100₼" />
+
+                        <TextView
+                            android:id="@+id/label_import_tax"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/label_import_tax"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="20sp"
+                            tools:text="Import Tax: 30₼" />
+
+                        <TextView
+                            android:id="@+id/label_tax_collections"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/label_tax_collections"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="20sp"
+                            tools:text="Tax Collections: 5₼" />
+
+                        <TextView
+                            android:id="@+id/label_service_fee"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/label_service_fee"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="20sp"
+                            tools:text="Service Fee: 10₼" />
+
+                        <TextView
+                            android:id="@+id/label_total"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/label_total"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:text="Total Tax: 145₼" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="90dp"
+                    android:elevation="4dp"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/gradient_green"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/label_total_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/label_total_price_to_pay"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            tools:text="Total Price to Pay: 1150 ₼" />
+
+                        <TextView
+                            android:id="@+id/label_cargo_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/quicksand_medium"
+                            android:text="@string/label_cargo_price"
+                            android:textColor="@color/primaryTextColor"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="Cargo Price: 120 ₼" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/button_calculate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="4dp"
+            android:text="@string/button_calculate" />
+    </RelativeLayout>
+
+
+</layout>

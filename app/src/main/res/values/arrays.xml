@@ -1,0 +1,51 @@
+<resources>
+    <!-- Default Calculation Preference -->
+    <string-array name="default_calculation_type_entries">
+        <item>@string/preference_default_calculation_type_entry_carrier</item>
+        <item>@string/preference_default_calculation_type_entry_cargo_price</item>
+    </string-array>
+
+    <string-array name="default_calculation_type_values">
+        <item>carrier</item>
+        <item>cargo_price</item>
+    </string-array>
+
+    <!-- Mass Unit Preference -->
+    <string-array name="calculation_mass_unit_entries">
+        <item>Kg</item>
+        <item>Lbs / Pounds</item>
+        <item>Oz</item>
+    </string-array>
+
+    <string-array name="calculation_mass_unit_values">
+        <item>kg</item>
+        <item>lbs</item>
+        <item>oz</item>
+    </string-array>
+
+    <!-- Language Preference -->
+    <string-array name="language_entries">
+        <item>@string/preference_language_entry_en</item>
+        <item>@string/preference_language_entry_az</item>
+        <item>@string/preference_language_entry_ru</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>en</item>
+        <item>az</item>
+        <item>ru</item>
+    </string-array>
+
+    <!--  Currency Preference -->
+    <string-array name="currency_entries">
+        <item>@string/preference_item_currency_entry_dollar</item>
+        <item>@string/preference_item_currency_entry_manat</item>
+        <item>@string/preference_item_currency_entry_tl</item>
+    </string-array>
+
+    <string-array name="currency_values">
+        <item>dollar</item>
+        <item>manat</item>
+        <item>tl</item>
+    </string-array>
+</resources>
