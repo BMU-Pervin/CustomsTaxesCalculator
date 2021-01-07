@@ -1,5 +1,6 @@
 package az.squareroot.customstaxescalc
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.View
@@ -50,6 +51,7 @@ fun bindImage(imageView: ImageView, data: Carrier?) {
     }
 }
 
+@SuppressLint("Range")
 @BindingAdapter("bindColor")
 fun bindColor(layout: GradientRelativeLayout, data: Carrier?) {
     if (data != null) {

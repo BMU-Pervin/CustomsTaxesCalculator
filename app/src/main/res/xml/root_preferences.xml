@@ -64,8 +64,8 @@
             app:title="@string/preference_detailed_calculation_title" />
 
         <SwitchPreferenceCompat
-            app:enabled="false"
-            app:defaultValue="false"
+            app:enabled="true"
+            app:defaultValue="true"
             app:dependency="calculation_type"
             app:icon="@drawable/ic_baseline_save_24dp"
             app:key="save_carrier"

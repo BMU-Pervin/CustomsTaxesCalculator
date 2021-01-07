@@ -2,7 +2,9 @@ package az.squareroot.customstaxescalc.database
 
 import android.app.Application
 import android.util.Log
-import az.squareroot.customstaxescalc.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import az.squareroot.customstaxescalc.R
 import az.squareroot.customstaxescalc.database.datastructure.Carrier
 import az.squareroot.customstaxescalc.database.datastructure.Price
 import az.squareroot.customstaxescalc.database.datastructure.Warehouse
@@ -14,6 +16,11 @@ object Carriers {
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
     private lateinit var application: Application
     private lateinit var database: CarriersDatabase
+
+    private var _liveDataInstance = MutableLiveData<ArrayList<Carrier>?>().apply {
+        value = null
+    }
+    val liveDataInstance: LiveData<ArrayList<Carrier>?> = _liveDataInstance
 
     @Volatile
     var INSTANCE: ArrayList<Carrier> = ArrayList()
@@ -35,6 +42,7 @@ object Carriers {
                     carrier.prices = prices
                     carrier.warehouses = warehouses
                 }
+                _liveDataInstance.value = carriers as ArrayList<Carrier>
                 INSTANCE = carriers as ArrayList<Carrier>
                 Log.i("Carriers", "Fetching ended.")
             }

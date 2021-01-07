@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         Carriers.setDB(this.application)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         editPreferences = sharedPreferences.edit()
-        val hey = sharedPreferences.getBoolean("inserted", false)
+
         if (!sharedPreferences.getBoolean("inserted", false)) {
             try {
                 Carriers.insert()
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             Carriers.startFetching()
         }
-        Log.i("MainActivity", "inserted: $hey")
+
         MobileAds.initialize(this) {}
         adView = findViewById(R.id.adview_footer)
         val adRequest = AdRequest.Builder().build()

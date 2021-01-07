@@ -97,7 +97,7 @@ class CalculateViewModel : ViewModel() {
     }
 
     override fun onCleared() {
-        Log.i("CalculateFragment.kt", "onClear")
+        Log.i("CalculateViewModel.kt", "onClear")
         super.onCleared()
     }
 }

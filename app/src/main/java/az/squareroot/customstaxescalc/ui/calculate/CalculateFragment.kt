@@ -2,7 +2,6 @@ package az.squareroot.customstaxescalc.ui.calculate
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -168,22 +167,15 @@ class CalculateFragment : Fragment() {
             }
         }
 
-        when (val carrierId = sharedPreferences.getInt("selected_carrier", -1)) {
-            -1 -> {
+        Carriers.liveDataInstance.observe(viewLifecycleOwner, {
+            val carrierId = sharedPreferences.getInt("selected_carrier", -1)
+            if (it == null || carrierId == -1) {
                 binding.carrier = null
+
+            } else {
+                binding.carrier = it[carrierId]
             }
-            else -> {
-                Log.i("CalculateFragment", sharedPreferences.getInt("selected_carrier", -1).toString())
-                Log.i("CalculateFragment", "INSTANCE = ${Carriers.INSTANCE.size}")
-                //val carrier = Carriers.INSTANCE[carrierId]
-                //Log.i("CalculateFragment", carrier.name)
-                try {
-                    binding.carrier = Carriers.INSTANCE[carrierId]
-                } catch (e: Exception) {
-                    binding.carrier = null
-                }
-            }
-        }
+        })
 
         binding.cardViewCarrier.setOnClickListener {
             navController.navigate(R.id.navigation_carriers)
