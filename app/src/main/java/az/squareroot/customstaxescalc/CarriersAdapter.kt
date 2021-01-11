@@ -1,5 +1,6 @@
 package az.squareroot.customstaxescalc
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.preference.PreferenceManager
@@ -51,9 +52,12 @@ class CarriersAdapter(private val itemClickListener: ItemClickListener) :
         val carrier = getItem(position)
         val preference = PreferenceManager.getDefaultSharedPreferences(holder.itemView.context)
         val editor = preference.edit()
-
+        Log.i("CarriersAdapter",
+            "\n\tcarrierName = ${carrier.name} " +
+                "\n\tcarrierId = ${carrier.id} " +
+                "\n\tposition = $position")
         holder.itemView.findViewById<MaterialCardView>(R.id.layout_carrier_card).setOnClickListener {
-            var temp: Int
+            val temp: Int
             val currentCard = it as MaterialCardView
             currentCard.toggle()
             if (currentCard.isChecked) {

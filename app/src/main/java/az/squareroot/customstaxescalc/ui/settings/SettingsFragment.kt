@@ -21,6 +21,5 @@ class SettingsFragment : PreferenceFragmentCompat() {
             val navController = findNavController()
             navController.navigateUp()
         }
-        toolbar.title = getString(R.string.title_settings)
     }
 }

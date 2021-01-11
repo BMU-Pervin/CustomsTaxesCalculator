@@ -212,4 +212,10 @@ class CalculateFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onStop() {
+        binding.inputTextItemPrice.requestFocus()
+        (binding.inputTextItemPrice as View).hideKeyboard()
+        super.onStop()
+    }
 }

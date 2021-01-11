@@ -31,6 +31,7 @@
     <string name="toast_unselected_carrier">You need to select a carrier for calculation.</string>
     <string name="button_calculate">Calculate</string>
     <string name="menu_item_settings">Settings</string>
+    <string name="menu_item_save">Save</string>
     <string name="menu_item_taxes" translatable="false">Taxes</string>
 
     <!-- Taxes Page Item Strings -->
@@ -98,6 +99,7 @@
     <string name="short_description_limak" translatable="false">2019-cu ildə fəaliyyətə başlamış şirkətin Bakı və Azərbaycanın bütün bölgələrində lisenziyalı regional ofisləri fəaliyyət göstərir. LİMAK VM MMC 7/24 rejimdə fəaliyyət göstərən heyəti ilə bu günə qədər 50 mindən artıq istifadəçinin 300 mindən çox bağlamasını təhvil verib. Şirkətin peşəkar müştəri xidmətləri  *9595 çağrı mərkəzi və bütün sosial platformalardakı online xidmətləri ilə yüksək müştəri məmnuniyyətini təmin edir.</string>
     <string name="short_description_mover" translatable="false">“Mover” MMC express logistika şirkətidir. 2015-ci ildən bəri Azərbaycan bazarında fəaliyyət göstərən şirkət bu günə qədər 60 mindən çox fiziki şəxsin 3 milyondan artıq yükünü müxtəlif xarici ölkələrdən Azərbaycana gətirib, o cümlədən ölkə daxilindəki ünvanlara əldən təslim edib.</string>
     <string name="short_description_camex" translatable="false">Camex şirkəti, Azərbaycan Respublikası İqtisadiyyat Nazirliyi tərəfindən verilmiş lisenziya əsasında 2012-ci ildən etibarən fəaliyyət göstərməkdədir.«Camex» ABŞ, Almaniya, BƏƏ, Türkiyə, Çin, İngiltərə poçt bağlamalarının, onlayn mağazalar vasitəsilə sifariş edilən malların, eləcə də böyük həcmli və ağır çəkili qeyri-standart yüklərin qısa müddətdə hava nəqliyyatı ilə Azərbaycana çatdırılmasını təşkil edir.</string>
+
 
     <!-- New -->
 </resources>
