@@ -86,17 +86,17 @@ fun bindTaxes(textView: TextView, data: Double) {
 
 @BindingAdapter("bindCargoPrice")
 fun bindCargoPrice(textView: TextView, data: Double) {
-    textView.text = textView.resources.getString(R.string.label_cargo_price, data)
+    textView.text = textView.resources.getString(R.string.label_calculation_cargo_price, data)
 }
 
 @BindingAdapter("bindDate")
 fun bindDate(textView: TextView, data: Date) {
-    textView.text = textView.resources.getText(R.string.label_total_price_to_pay, formatDate(data))
+    textView.text = textView.resources.getString(R.string.label_calculation_saved_on, formatDate(data))
 }
 
 @SuppressLint("SimpleDateFormat")
 private fun formatDate(dateObject: Date): String {
-    val dateFormat = SimpleDateFormat("LLL dd, yyyy")
+    val dateFormat = SimpleDateFormat("dd.MM.yyyy")
     return dateFormat.format(dateObject)
 }
 

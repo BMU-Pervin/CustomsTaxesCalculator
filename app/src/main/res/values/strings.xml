@@ -61,9 +61,10 @@
     <string name="label_carrier_warehouse">Warehouses: %1$s</string>
 
     <!-- Saved Calculation Page Item Strings -->
-    <string name="label_calculation_price" translatable="false">%1$.2f₼</string>
-    <string name="label_calculation_saved_on" translatable="false">%1$s</string>
-    <string name="label_calculation_taxes" translatable="false">%1$.2f₼</string>
+    <string name="label_calculation_price" translatable="false">%1$.1f₼</string>
+    <string name="label_calculation_saved_on" translatable="false">Saved on: %1$s</string>
+    <string name="label_calculation_taxes" translatable="false">Taxes: %1$.1f₼</string>
+    <string name="label_calculation_cargo_price" translatable="false">Cargo price: %1$.1f$</string>
 
     <!-- Preference Titles -->
     <string name="preference_general_header">General</string>

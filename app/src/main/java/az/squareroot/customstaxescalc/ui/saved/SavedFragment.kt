@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import az.squareroot.customstaxescalc.R
 import az.squareroot.customstaxescalc.SavedCalculationsAdapter
 import az.squareroot.customstaxescalc.database.datastructure.SavedCalculation
 import az.squareroot.customstaxescalc.databinding.FragmentSavedBinding
@@ -23,18 +22,18 @@ class SavedFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSavedBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.savedCalculationsList.adapter = SavedCalculationsAdapter()
 
         val list = ArrayList<SavedCalculation>()
-        val myCalendar: Calendar = GregorianCalendar(2014, 2, 11)
+        val myCalendar: Calendar = GregorianCalendar(2021, 0, 19)
         val myDate = myCalendar.time
         list.add(SavedCalculation(0, "Komputer", 128.0, 14.5, 1115.0, myDate))
         (binding.savedCalculationsList.adapter as SavedCalculationsAdapter).submitList(list)
 
-        return inflater.inflate(R.layout.fragment_saved, container, false)
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

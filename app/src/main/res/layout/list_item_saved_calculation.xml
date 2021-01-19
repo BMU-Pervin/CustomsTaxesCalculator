@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="calculation"
             type="az.squareroot.customstaxescalc.database.datastructure.SavedCalculation" />
@@ -29,10 +30,11 @@
             <TextView
                 android:id="@+id/label_calculation_name"
                 android:layout_width="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@id/image_carrier"
+                android:layout_toStartOf="@+id/label_calculation_price"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="@{calculation.name}"
                 android:textColor="@color/primaryTextColor"
@@ -46,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_toStartOf="@id/image_carrier"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="@dimen/label_carrier_name_size"
@@ -81,6 +82,7 @@
                 tools:text="Cargo price: 17$" />
 
             <TextView
+                android:layout_marginTop="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label_calculation_cargo_price"
