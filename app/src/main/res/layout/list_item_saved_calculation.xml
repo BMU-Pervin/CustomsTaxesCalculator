@@ -22,9 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
-            app:end_color="#1A2980"
+            app:end_color="@color/blue"
             app:orientation="RIGHT_LEFT"
-            app:start_color="#26D0CE">
+            app:start_color="@color/cyan">
 
             <TextView
                 android:id="@+id/label_calculation_name"
