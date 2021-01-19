@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="calculation"
+            type="az.squareroot.customstaxescalc.database.datastructure.SavedCalculation" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="8dp"
+        app:cardCornerRadius="15dp">
+
+        <net.colindodd.gradientlayout.GradientRelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            app:end_color="#1A2980"
+            app:orientation="RIGHT_LEFT"
+            app:start_color="#26D0CE">
+
+            <TextView
+                android:id="@+id/label_calculation_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/image_carrier"
+                android:fontFamily="@font/quicksand_medium"
+                android:text="@{calculation.name}"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/label_carrier_name_size"
+                android:textStyle="bold"
+                tools:text="Computer" />
+
+            <TextView
+                android:id="@+id/label_calculation_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@id/image_carrier"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="@dimen/label_carrier_name_size"
+                android:textStyle="bold"
+                app:bindTotalPrice="@{calculation.totalPrice}"
+                tools:text="1500₼" />
+
+            <TextView
+                android:id="@+id/label_calculation_taxes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_calculation_name"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/image_carrier"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="18sp"
+                app:bindTaxes="@{calculation.taxes}"
+                tools:text="Taxes: 126₼" />
+
+            <TextView
+                android:id="@+id/label_calculation_cargo_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_calculation_taxes"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/image_carrier"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="18sp"
+                app:bindCargoPrice="@{calculation.cargoPrice}"
+                tools:text="Cargo price: 17$" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_calculation_cargo_price"
+                android:layout_alignParentEnd="true"
+                android:layout_toStartOf="@id/image_carrier"
+                android:fontFamily="@font/quicksand_medium"
+                android:textColor="@color/primaryTextColor"
+                android:textSize="16sp"
+                app:bindDate="@{calculation.date}"
+                tools:text="Saved on: Jan 19, 2021" />
+        </net.colindodd.gradientlayout.GradientRelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

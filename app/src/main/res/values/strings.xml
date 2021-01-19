@@ -60,6 +60,11 @@
     <string name="label_carrier_price">Price: %1$.2f$ - %2$.2f$</string>
     <string name="label_carrier_warehouse">Warehouses: %1$s</string>
 
+    <!-- Saved Calculation Page Item Strings -->
+    <string name="label_calculation_price" translatable="false">%1$.2f₼</string>
+    <string name="label_calculation_saved_on" translatable="false">%1$s</string>
+    <string name="label_calculation_taxes" translatable="false">%1$.2f₼</string>
+
     <!-- Preference Titles -->
     <string name="preference_general_header">General</string>
     <string name="preference_calculation_header">Calculation</string>
@@ -96,10 +101,12 @@
     <string name="warehouse_ganja">Ganja</string>
     <string name="warehouse_sumgayit">Sumgayit</string>
     <string name="warehouse_zagatala">Zagatala</string>
+
+    <!-- Carrier Short Descriptions -->
     <string name="short_description_limak" translatable="false">2019-cu ildə fəaliyyətə başlamış şirkətin Bakı və Azərbaycanın bütün bölgələrində lisenziyalı regional ofisləri fəaliyyət göstərir. LİMAK VM MMC 7/24 rejimdə fəaliyyət göstərən heyəti ilə bu günə qədər 50 mindən artıq istifadəçinin 300 mindən çox bağlamasını təhvil verib. Şirkətin peşəkar müştəri xidmətləri  *9595 çağrı mərkəzi və bütün sosial platformalardakı online xidmətləri ilə yüksək müştəri məmnuniyyətini təmin edir.</string>
     <string name="short_description_mover" translatable="false">“Mover” MMC express logistika şirkətidir. 2015-ci ildən bəri Azərbaycan bazarında fəaliyyət göstərən şirkət bu günə qədər 60 mindən çox fiziki şəxsin 3 milyondan artıq yükünü müxtəlif xarici ölkələrdən Azərbaycana gətirib, o cümlədən ölkə daxilindəki ünvanlara əldən təslim edib.</string>
     <string name="short_description_camex" translatable="false">Camex şirkəti, Azərbaycan Respublikası İqtisadiyyat Nazirliyi tərəfindən verilmiş lisenziya əsasında 2012-ci ildən etibarən fəaliyyət göstərməkdədir.«Camex» ABŞ, Almaniya, BƏƏ, Türkiyə, Çin, İngiltərə poçt bağlamalarının, onlayn mağazalar vasitəsilə sifariş edilən malların, eləcə də böyük həcmli və ağır çəkili qeyri-standart yüklərin qısa müddətdə hava nəqliyyatı ilə Azərbaycana çatdırılmasını təşkil edir.</string>
 
-
     <!-- New -->
+
 </resources>

@@ -11,6 +11,7 @@ class SavedCalculation (
     var id: Int = 0,
     var name: String = "",
     var taxes: Double = 0.0,
+    var cargoPrice: Double = 0.0,
     @ColumnInfo(name = "total_price")
     var totalPrice: Double = 0.0,
     val date: Date

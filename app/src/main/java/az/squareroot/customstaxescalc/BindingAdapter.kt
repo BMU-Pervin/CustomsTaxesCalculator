@@ -10,6 +10,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import az.squareroot.customstaxescalc.database.datastructure.Carrier
 import net.colindodd.gradientlayout.GradientRelativeLayout
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("bindPrice")
 fun bindPrice(textView: TextView, data: Carrier?) {
@@ -70,6 +72,32 @@ fun bindVisibility(textView: TextView, data: Carrier?) {
     } else {
         textView.visibility = View.GONE
     }
+}
+
+@BindingAdapter("bindTotalPrice")
+fun bindTotalPrice(textView: TextView, data: Double) {
+    textView.text = textView.resources.getString(R.string.label_calculation_price, data)
+}
+
+@BindingAdapter("bindTaxes")
+fun bindTaxes(textView: TextView, data: Double) {
+    textView.text = textView.resources.getString(R.string.label_calculation_taxes, data)
+}
+
+@BindingAdapter("bindCargoPrice")
+fun bindCargoPrice(textView: TextView, data: Double) {
+    textView.text = textView.resources.getString(R.string.label_cargo_price, data)
+}
+
+@BindingAdapter("bindDate")
+fun bindDate(textView: TextView, data: Date) {
+    textView.text = textView.resources.getText(R.string.label_total_price_to_pay, formatDate(data))
+}
+
+@SuppressLint("SimpleDateFormat")
+private fun formatDate(dateObject: Date): String {
+    val dateFormat = SimpleDateFormat("LLL dd, yyyy")
+    return dateFormat.format(dateObject)
 }
 
 fun View.hideKeyboard() {
