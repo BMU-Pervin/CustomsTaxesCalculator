@@ -8,6 +8,10 @@ import az.squareroot.customstaxescalc.database.Carriers
 
 class CalculateViewModel : ViewModel() {
 
+    enum class MassUnit {
+        KG, LBS, OZ
+    }
+
     private var _itemPrice = MutableLiveData<Double>().apply {
         value = 0.0
     }
@@ -48,6 +52,10 @@ class CalculateViewModel : ViewModel() {
     }
     val totalPrice: LiveData<Double> = _totalPrice
 
+    var massUnit = MutableLiveData<MassUnit>().apply {
+        value = MassUnit.KG
+    }
+
     fun calculate(itemPrice: Double, usedLimit: Double, cargoPrice: Double) {
         _itemPrice.value = itemPrice
         _cargoPrice.value = cargoPrice
@@ -79,15 +87,23 @@ class CalculateViewModel : ViewModel() {
     }
 
     fun calculate(itemPrice: Double, usedLimit: Double, itemWeight: Double, carrierId: Int) {
+        val weight = when (massUnit.value) {
+            MassUnit.LBS -> itemWeight * 0.45359237
+            MassUnit.OZ -> itemWeight * 0.0283495231
+            else -> itemWeight
+        }
+        Log.i("CalculateViewModel.kt", "weight=$weight")
         val carrier = Carriers.INSTANCE[carrierId]
         val prices = carrier.prices
-        val max = prices[prices.size - 1]
         var cargo = 0.0
         for (price in prices) {
-            if (itemWeight in price.startWeight..price.endWeight) {
-                if (price == max) {
-                    cargo = price.price * itemWeight
+            if (weight in price.startWeight..price.endWeight) {
+                Log.i("CalculateViewModel.kt", "start=${price.startWeight} end=${price.endWeight}")
+                if (price.startWeight >= 1.0) {
+                    Log.i("CalculateViewModel.kt", "IF")
+                    cargo = price.price * weight
                 } else {
+                    Log.i("CalculateViewModel.kt", "ELSE")
                     cargo = price.price
                 }
                 break

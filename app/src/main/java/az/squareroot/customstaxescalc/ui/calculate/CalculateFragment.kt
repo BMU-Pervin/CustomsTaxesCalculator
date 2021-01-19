@@ -148,7 +148,7 @@ class CalculateFragment : Fragment() {
             }
         }
 
-        when (sharedPreferences.getString("calculation_type", "carrier")) {
+        when (sharedPreferences.getString("calculation_type", "cargo_price")) {
             "carrier" -> {
                 binding.apply {
                     inputLayoutCargoPrice.visibility = View.GONE
@@ -164,6 +164,21 @@ class CalculateFragment : Fragment() {
                     cardViewCarrier.visibility = View.GONE
                     labelCargoPrice.visibility = View.GONE
                 }
+            }
+        }
+
+        when (sharedPreferences.getString("mass_unit", "kg")) {
+            "kg" -> {
+                binding.inputLayoutItemWeight.prefixText = "Kg  "
+                viewModel.massUnit.value = CalculateViewModel.MassUnit.KG
+            }
+            "lbs" -> {
+                binding.inputLayoutItemWeight.prefixText = "Lbs  "
+                viewModel.massUnit.value = CalculateViewModel.MassUnit.LBS
+            }
+            "oz" -> {
+                binding.inputLayoutItemWeight.prefixText = "Oz  "
+                viewModel.massUnit.value = CalculateViewModel.MassUnit.OZ
             }
         }
 

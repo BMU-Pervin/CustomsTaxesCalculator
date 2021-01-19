@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:visible="false"
         android:id="@+id/navigation_history"
         android:icon="@drawable/ic_baseline_history_24dp"
         android:title="@string/title_history" />
@@ -22,6 +23,7 @@
         android:title="@string/title_carriers" />
 
     <item
+        android:visible="false"
         android:id="@+id/navigation_rules"
         android:icon="@drawable/ic_outline_rules_24dp_2"
         android:title="@string/title_rules" />

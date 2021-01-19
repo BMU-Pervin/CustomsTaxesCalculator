@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        Carriers.cancel()
         when (sharedPreferences.getBoolean("save_carrier", true)) {
             false -> {
                 editPreferences.putInt("selected_carrier", -1)

@@ -13,6 +13,7 @@
             app:useSimpleSummaryProvider="true" />
 
         <DropDownPreference
+            app:isPreferenceVisible="false"
             app:enabled="false"
             app:defaultValue="dollar"
             app:entries="@array/currency_entries"
@@ -27,7 +28,7 @@
     <PreferenceCategory app:title="@string/preference_calculation_header">
 
         <ListPreference
-            app:defaultValue="carrier"
+            app:defaultValue="cargo_price"
             app:entries="@array/default_calculation_type_entries"
             app:entryValues="@array/default_calculation_type_values"
             app:icon="@drawable/ic_baseline_calculate_24dp"
@@ -37,7 +38,7 @@
             app:useSimpleSummaryProvider="false" />
 
         <ListPreference
-            app:enabled="false"
+            app:enabled="true"
             app:defaultValue="kg"
             app:entries="@array/calculation_mass_unit_entries"
             app:entryValues="@array/calculation_mass_unit_values"

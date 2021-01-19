@@ -80,14 +80,16 @@ object Carriers {
         limakPrices.add(Price(0, 1.99, 0.0, 0.25, 1))
         limakPrices.add(Price(0, 3.99, 0.25, 0.5, 1))
         limakPrices.add(Price(0, 4.99, 0.5, 0.7, 1))
-        limakPrices.add(Price(0, 5.99, 0.7, 100.0, 1))
+        limakPrices.add(Price(0, 5.99, 0.7, 1.0, 1))
+        limakPrices.add(Price(0, 5.99, 1.0, 100.0, 1))
 
         val moverPrices: ArrayList<Price> = ArrayList()
         moverPrices.add(Price(0, 3.5, 0.0, 0.1, 2))
         moverPrices.add(Price(0, 4.5, 0.1, 0.25, 2))
         moverPrices.add(Price(0, 5.5, 0.25, 0.5, 2))
         moverPrices.add(Price(0, 6.5, 0.5, 0.75, 2))
-        moverPrices.add(Price(0, 7.5, 0.75, 100.0, 2))
+        moverPrices.add(Price(0, 7.5, 0.75, 1.0, 2))
+        moverPrices.add(Price(0, 7.5, 1.00, 100.0, 2))
 
         val camexPrices: ArrayList<Price> = ArrayList()
         camexPrices.add(Price(0, 2.45, 0.0, 0.25, 3))
@@ -115,13 +117,15 @@ object Carriers {
         vipexPrices.add(Price(0, 2.5, 0.1, 0.25, 6))
         vipexPrices.add(Price(0, 4.0, 0.25, 0.5, 6))
         vipexPrices.add(Price(0, 5.0, 0.5, 0.75, 6))
-        vipexPrices.add(Price(0, 6.5, 0.75, 100.0, 6))
+        vipexPrices.add(Price(0, 6.5, 0.75, 1.0, 6))
+        vipexPrices.add(Price(0, 6.5, 1.0, 100.0, 6))
 
         val safeExpressPrices: ArrayList<Price> = ArrayList()
         safeExpressPrices.add(Price(0, 2.37, 0.0, 0.25, 7))
         safeExpressPrices.add(Price(0, 3.37, 0.25, 0.5, 7))
         safeExpressPrices.add(Price(0, 4.37, 0.5, 0.7, 7))
-        safeExpressPrices.add(Price(0, 4.47, 0.7, 100.0, 7))
+        safeExpressPrices.add(Price(0, 4.47, 0.7, 1.0, 7))
+        safeExpressPrices.add(Price(0, 4.47, 1.0, 100.0, 7))
 
         carriers.add(
             Carrier(
@@ -225,7 +229,7 @@ object Carriers {
                 "SafeExpress",
                 safeExpressPrices,
                 "Limak",
-                R.drawable.logo_safex,
+                R.drawable.logo_safex_min,
                 "#26D0CE",
                 "#1A2980",
                 arrayOf(
@@ -299,5 +303,9 @@ object Carriers {
                 database.carrierDao.delete(carrier)
             }
         }
+    }
+
+    fun cancel() {
+        viewModelJob.cancel()
     }
 }
