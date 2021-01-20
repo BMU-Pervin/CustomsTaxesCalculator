@@ -11,6 +11,9 @@ interface SavedCalculationDao {
     @Insert
     fun insert(calculation: SavedCalculation)
 
+    @Query("DELETE FROM saved_calculation WHERE id=:id")
+    fun delete(id: Int)
+
     @Query("SELECT * FROM saved_calculation")
     fun getAll(): List<SavedCalculation>
 

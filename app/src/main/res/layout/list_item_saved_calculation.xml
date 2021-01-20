@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="calculation"
             type="az.squareroot.customstaxescalc.database.datastructure.SavedCalculation" />
@@ -30,15 +29,15 @@
             <TextView
                 android:id="@+id/label_calculation_name"
                 android:layout_width="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
+                android:layout_marginEnd="8dp"
                 android:layout_toStartOf="@+id/label_calculation_price"
                 android:fontFamily="@font/quicksand_medium"
                 android:text="@{calculation.name}"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="@dimen/label_carrier_name_size"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 tools:text="Computer" />
 
@@ -64,7 +63,7 @@
                 android:layout_toStartOf="@id/image_carrier"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:bindTaxes="@{calculation.taxes}"
                 tools:text="Taxes: 126₼" />
 
@@ -77,18 +76,30 @@
                 android:layout_toStartOf="@id/image_carrier"
                 android:fontFamily="@font/quicksand_medium"
                 android:textColor="@color/primaryTextColor"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 app:bindCargoPrice="@{calculation.cargoPrice}"
                 tools:text="Cargo price: 17$" />
 
-            <TextView
-                android:layout_marginTop="8dp"
+            <Button
+                android:id="@+id/button_delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/label_calculation_cargo_price"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/cyan"
+                android:text="@string/button_delete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/label_calculation_cargo_price"
+                android:layout_alignTop="@id/button_delete"
                 android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
                 android:layout_toStartOf="@id/image_carrier"
                 android:fontFamily="@font/quicksand_medium"
+                android:paddingTop="8dp"
                 android:textColor="@color/primaryTextColor"
                 android:textSize="16sp"
                 app:bindDate="@{calculation.date}"

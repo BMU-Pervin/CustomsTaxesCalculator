@@ -11,8 +11,7 @@ import az.squareroot.customstaxescalc.database.datastructure.Carrier
 import az.squareroot.customstaxescalc.databinding.ListItemCarrierBinding
 import com.google.android.material.card.MaterialCardView
 
-class CarriersAdapter(private val itemClickListener: ItemClickListener) :
-    ListAdapter<Carrier, CarriersAdapter.CarrierViewHolder>(DiffCallback) {
+class CarriersAdapter: ListAdapter<Carrier, CarriersAdapter.CarrierViewHolder>(DiffCallback) {
 
     class CarrierViewHolder(private val binding: ListItemCarrierBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -52,10 +51,12 @@ class CarriersAdapter(private val itemClickListener: ItemClickListener) :
         val carrier = getItem(position)
         val preference = PreferenceManager.getDefaultSharedPreferences(holder.itemView.context)
         val editor = preference.edit()
-        Log.i("CarriersAdapter",
+        Log.i(
+            "CarriersAdapter",
             "\n\tcarrierName = ${carrier.name} " +
-                "\n\tcarrierId = ${carrier.id} " +
-                "\n\tposition = $position")
+                    "\n\tcarrierId = ${carrier.id} " +
+                    "\n\tposition = $position"
+        )
         holder.itemView.findViewById<MaterialCardView>(R.id.layout_carrier_card).setOnClickListener {
             val temp: Int
             val currentCard = it as MaterialCardView

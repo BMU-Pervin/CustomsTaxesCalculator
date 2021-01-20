@@ -2,13 +2,14 @@ package az.squareroot.customstaxescalc
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import az.squareroot.customstaxescalc.database.datastructure.SavedCalculation
 import az.squareroot.customstaxescalc.databinding.ListItemSavedCalculationBinding
 
-class SavedCalculationsAdapter :
+class SavedCalculationsAdapter(private val itemClickListener: ItemClickListener):
     ListAdapter<SavedCalculation, SavedCalculationsAdapter.SavedCalculationViewHolder>(DiffCallback) {
 
     class SavedCalculationViewHolder(private val binding: ListItemSavedCalculationBinding) :
@@ -41,6 +42,9 @@ class SavedCalculationsAdapter :
 
     override fun onBindViewHolder(holder: SavedCalculationViewHolder, position: Int) {
         val savedCalculation = getItem(position)
+        holder.itemView.findViewById<Button>(R.id.button_delete).setOnClickListener {
+            itemClickListener.onClick(savedCalculation.id)
+        }
         holder.bind(savedCalculation)
     }
 }

@@ -14,7 +14,7 @@ import az.squareroot.customstaxescalc.ItemClickListener
 import az.squareroot.customstaxescalc.database.datastructure.Carrier
 import az.squareroot.customstaxescalc.databinding.FragmentCarriersBinding
 
-class CarriersFragment : Fragment(), ItemClickListener, SearchView.OnQueryTextListener {
+class CarriersFragment : Fragment(), SearchView.OnQueryTextListener {
 
     private lateinit var binding: FragmentCarriersBinding
 
@@ -29,7 +29,7 @@ class CarriersFragment : Fragment(), ItemClickListener, SearchView.OnQueryTextLi
         //val viewModel = ViewModelProviders.of(this, viewModelFactory).get(CarriersViewModel::class.java)
         binding.lifecycleOwner = this
 
-        binding.carriersList.adapter = CarriersAdapter(this)
+        binding.carriersList.adapter = CarriersAdapter()
 
         val toolbar:Toolbar = binding.toolbarCarriers as Toolbar
         val menuItem = toolbar.menu.findItem(R.id.menu_item_search)
@@ -39,10 +39,6 @@ class CarriersFragment : Fragment(), ItemClickListener, SearchView.OnQueryTextLi
         (binding.carriersList.adapter as CarriersAdapter).submitList(Carriers.INSTANCE)
 
         return binding.root
-    }
-
-    override fun onClick(id: Long) {
-        TODO("Not yet implemented")
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {

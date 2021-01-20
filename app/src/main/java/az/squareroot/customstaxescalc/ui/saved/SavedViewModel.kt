@@ -1,4 +1,4 @@
-package com.example.taxpay.ui.saved
+package az.squareroot.customstaxescalc.ui.saved
 
 import android.app.Application
 import androidx.lifecycle.LiveData
@@ -13,14 +13,29 @@ import kotlinx.coroutines.withContext
 
 class SavedViewModel(private val application: Application) : ViewModel() {
     private val db = CarriersDatabase.getInstance(application)
-    private val _calculations = MutableLiveData<ArrayList<SavedCalculation>>().apply {
+    private val _calculations = MutableLiveData<ArrayList<SavedCalculation>>()
+    val calculations: LiveData<ArrayList<SavedCalculation>> = _calculations
+
+    init {
+        fetchData()
+    }
+
+    fun fetchData() {
         CoroutineScope(Dispatchers.Main).launch {
-            var list = ArrayList<SavedCalculation>()
+            var list: ArrayList<SavedCalculation>
             withContext(Dispatchers.IO) {
                 list = db.savedCalculationDao.getAll() as ArrayList<SavedCalculation>
             }
-            value = list
+            _calculations.value = list
         }
     }
-    val calculations: LiveData<ArrayList<SavedCalculation>> = _calculations
+
+    fun deleteCalculation(id: Int) {
+        CoroutineScope(Dispatchers.Main).launch {
+            withContext(Dispatchers.IO) {
+                db.savedCalculationDao.delete(id)
+            }
+            fetchData()
+        }
+    }
 }
