@@ -7,11 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import az.squareroot.customstaxescalc.SavedCalculationsAdapter
-import az.squareroot.customstaxescalc.database.datastructure.SavedCalculation
 import az.squareroot.customstaxescalc.databinding.FragmentSavedBinding
 import com.example.taxpay.ui.saved.SavedViewModel
-import java.util.*
-import kotlin.collections.ArrayList
 
 class SavedFragment : Fragment() {
 
@@ -23,23 +20,17 @@ class SavedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val viewModelFactory = SavedViewModelFactory(requireActivity().application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SavedViewModel::class.java)
         binding = FragmentSavedBinding.inflate(inflater)
         binding.lifecycleOwner = this
+
         binding.savedCalculationsList.adapter = SavedCalculationsAdapter()
 
-        val list = ArrayList<SavedCalculation>()
-        val myCalendar: Calendar = GregorianCalendar(2021, 0, 19)
-        val myDate = myCalendar.time
-        list.add(SavedCalculation(0, "Komputer", 128.0, 14.5, 1115.0, myDate))
-        (binding.savedCalculationsList.adapter as SavedCalculationsAdapter).submitList(list)
+        viewModel.calculations.observe(viewLifecycleOwner) {
+            (binding.savedCalculationsList.adapter as SavedCalculationsAdapter).submitList(it)
+        }
 
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SavedViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

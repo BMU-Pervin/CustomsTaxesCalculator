@@ -32,8 +32,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val application = requireActivity().application
-        val viewModelFactory = CalculateViewModelFactory(application)
+        val viewModelFactory = CalculateViewModelFactory(requireActivity().application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(CalculateViewModel::class.java)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context)
         navController = (this as Fragment).findNavController()
@@ -51,12 +50,12 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                         val dialog = SaveDialog()
                         dialog.setTargetFragment(this, 0)
                         dialog.show(parentFragmentManager, "SaveDialog")
-                        viewModel.saveCalculation()
                     } else {
                         Snackbar.make(binding.root, R.string.snackbar_menu_save_error, Snackbar.LENGTH_LONG)
                             .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
                             .show()
                     }
+                    hideKeyboard()
                     true
                 }
                 else -> false
@@ -86,7 +85,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                     usedLimit = 300.0
                 }
 
-                when (sharedPreferences.getString("calculation_type", "carrier")) {
+                when (sharedPreferences.getString("calculation_type", "cargo_price")) {
                     "cargo_price" -> {
                         try {
                             val cargoPrice = binding.inputTextCargoPrice.text.toString().toDouble()
@@ -121,8 +120,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                 (binding.inputTextItemPrice as EditText).setText("")
                 (binding.inputTextCargoPrice as EditText).setText("")
             }
-            binding.inputTextItemPrice.requestFocus()
-            (binding.inputTextItemPrice as View).hideKeyboard()
+            hideKeyboard()
         }
 
         binding.checkboxLimitUsed.setOnCheckedChangeListener { _, isChecked ->
@@ -216,33 +214,33 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
             navController.navigate(R.id.navigation_carriers)
         }
 
-        viewModel.cargoPrice.observe(viewLifecycleOwner, {
+        viewModel.cargoPrice.observe(viewLifecycleOwner) {
             binding.labelCargoPrice.text = getString(R.string.label_cargo_price, it)
-        })
+        }
 
-        viewModel.vat.observe(viewLifecycleOwner, {
+        viewModel.vat.observe(viewLifecycleOwner) {
             binding.labelVat.text = getString(R.string.label_vat, it)
-        })
+        }
 
-        viewModel.itax.observe(viewLifecycleOwner, {
+        viewModel.itax.observe(viewLifecycleOwner) {
             binding.labelImportTax.text = getString(R.string.label_import_tax, it)
-        })
+        }
 
-        viewModel.tc.observe(viewLifecycleOwner, {
+        viewModel.tc.observe(viewLifecycleOwner) {
             binding.labelTaxCollections.text = getString(R.string.label_tax_collections, it.toDouble())
-        })
+        }
 
-        viewModel.sf.observe(viewLifecycleOwner, {
+        viewModel.sf.observe(viewLifecycleOwner) {
             binding.labelServiceFee.text = getString(R.string.label_service_fee, it)
-        })
+        }
 
-        viewModel.total.observe(viewLifecycleOwner, {
+        viewModel.total.observe(viewLifecycleOwner) {
             binding.labelTotal.text = getString(R.string.label_total, it)
-        })
+        }
 
-        viewModel.totalPrice.observe(viewLifecycleOwner, {
+        viewModel.totalPrice.observe(viewLifecycleOwner) {
             binding.labelTotalPrice.text = getString(R.string.label_total_price_to_pay, it)
-        })
+        }
 
         viewModel.name.observe(viewLifecycleOwner, {
 
@@ -256,7 +254,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                         .show()
                 }
                 else -> {
-                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                    viewModel.saveCalculation()
                 }
             }
         })
@@ -269,8 +267,12 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
     }
 
     override fun onStop() {
-        binding.inputTextItemPrice.requestFocus()
-        (binding.inputTextItemPrice as View).hideKeyboard()
+        hideKeyboard()
         super.onStop()
+    }
+
+    private fun hideKeyboard() {
+        binding.layoutCalculation.requestFocus()
+        (binding.layoutCalculation as View).hideKeyboard()
     }
 }

@@ -101,7 +101,6 @@ class CalculateViewModel(private val application: Application) : ViewModel() {
         }
 
         _totalPrice.value = (itemPrice + cargoPrice) * 1.7 + total.value!!
-        Log.i("CalculateViewModel", "Calculate")
         calculated.value = true
     }
 
@@ -133,7 +132,12 @@ class CalculateViewModel(private val application: Application) : ViewModel() {
 
     fun saveCalculation() {
         uiScope.launch {
-            val cal = SavedCalculation(0, name.value!!, total.value!!, cargoPrice.value!!, totalPrice.value!!, Calendar.getInstance().time)
+            val cal = SavedCalculation(0,
+                name.value!!,
+                total.value!!,
+                cargoPrice.value!!,
+                totalPrice.value!!,
+                Calendar.getInstance().time)
             withContext(Dispatchers.IO) {
                 db.savedCalculationDao.insert(cal)
             }

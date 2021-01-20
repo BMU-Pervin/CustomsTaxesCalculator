@@ -11,6 +11,9 @@
     </data>
 
     <RelativeLayout
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:id="@+id/layout_calculation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.calculate.CalculateFragment">
