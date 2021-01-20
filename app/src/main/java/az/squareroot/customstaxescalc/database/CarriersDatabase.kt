@@ -14,7 +14,7 @@ import az.squareroot.customstaxescalc.database.datastructure.Price
 import az.squareroot.customstaxescalc.database.datastructure.SavedCalculation
 import az.squareroot.customstaxescalc.database.datastructure.Warehouse
 
-@Database(entities = [Carrier::class, Price::class, Warehouse::class, SavedCalculation::class], version = 1, exportSchema = false)
+@Database(entities = [Carrier::class, Price::class, Warehouse::class, SavedCalculation::class], version = 2, exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class CarriersDatabase: RoomDatabase() {
 
@@ -32,11 +32,9 @@ abstract class CarriersDatabase: RoomDatabase() {
             synchronized(this) {
                 var instance = INSTANCE
                 if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        CarriersDatabase::class.java,
-                        "carriers_database"
-                    ).build()
+                    instance = Room.databaseBuilder(context.applicationContext, CarriersDatabase::class.java, "carriers_database")
+                        .fallbackToDestructiveMigration()
+                        .build()
                     INSTANCE = instance
                 }
                 return instance
