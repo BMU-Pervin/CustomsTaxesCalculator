@@ -1,12 +1,21 @@
 package az.squareroot.customstaxescalc.ui.calculate
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import az.squareroot.customstaxescalc.database.Carriers
+import az.squareroot.customstaxescalc.database.CarriersDatabase
+import az.squareroot.customstaxescalc.database.datastructure.SavedCalculation
+import kotlinx.coroutines.*
+import java.util.*
 
-class CalculateViewModel : ViewModel() {
+class CalculateViewModel(private val application: Application) : ViewModel() {
+
+    private val job = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + job)
+    private val db = CarriersDatabase.getInstance(application)
 
     enum class MassUnit {
         KG, LBS, OZ
@@ -60,6 +69,10 @@ class CalculateViewModel : ViewModel() {
         value = null
     }
 
+    var calculated = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+
     fun calculate(itemPrice: Double, usedLimit: Double, cargoPrice: Double) {
         _itemPrice.value = itemPrice
         _cargoPrice.value = cargoPrice
@@ -88,6 +101,8 @@ class CalculateViewModel : ViewModel() {
         }
 
         _totalPrice.value = (itemPrice + cargoPrice) * 1.7 + total.value!!
+        Log.i("CalculateViewModel", "Calculate")
+        calculated.value = true
     }
 
     fun calculate(itemPrice: Double, usedLimit: Double, itemWeight: Double, carrierId: Int) {
@@ -116,8 +131,17 @@ class CalculateViewModel : ViewModel() {
         calculate(itemPrice, usedLimit, cargo)
     }
 
+    fun saveCalculation() {
+        uiScope.launch {
+            val cal = SavedCalculation(0, name.value!!, total.value!!, cargoPrice.value!!, totalPrice.value!!, Calendar.getInstance().time)
+            withContext(Dispatchers.IO) {
+                db.savedCalculationDao.insert(cal)
+            }
+        }
+    }
+
     override fun onCleared() {
-        Log.i("CalculateViewModel.kt", "onClear")
+        job.cancel()
         super.onCleared()
     }
 }

@@ -34,6 +34,7 @@
     <string name="label_dialog_save_calculation_cancel">Cancel</string>
     <string name="label_dialog_hint_calculation_name">Calculation name</string>
     <string name="snackbar_dialog_error">You entered unsupported name.</string>
+    <string name="snackbar_menu_save_error">First you need a valid calculation in order to save it.</string>
     <string name="toast_unselected_carrier">You need to select a carrier for calculation.</string>
     <string name="button_calculate">Calculate</string>
     <string name="menu_item_settings">Settings</string>

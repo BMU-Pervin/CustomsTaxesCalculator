@@ -32,7 +32,9 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewModel = ViewModelProvider(this).get(CalculateViewModel::class.java)
+        val application = requireActivity().application
+        val viewModelFactory = CalculateViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(CalculateViewModel::class.java)
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.context)
         navController = (this as Fragment).findNavController()
         binding = FragmentCalculateBinding.inflate(inflater)
@@ -45,9 +47,16 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                     true
                 }
                 R.id.menu_item_save -> {
-                    val dialog = SaveDialog()
-                    dialog.setTargetFragment(this, 0)
-                    dialog.show(parentFragmentManager, "SaveDialog")
+                    if (viewModel.calculated.value == true) {
+                        val dialog = SaveDialog()
+                        dialog.setTargetFragment(this, 0)
+                        dialog.show(parentFragmentManager, "SaveDialog")
+                        viewModel.saveCalculation()
+                    } else {
+                        Snackbar.make(binding.root, R.string.snackbar_menu_save_error, Snackbar.LENGTH_LONG)
+                            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
+                            .show()
+                    }
                     true
                 }
                 else -> false
@@ -71,7 +80,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                         }
                     } catch (e: NumberFormatException) {
                         binding.inputLayoutUsedLimit.error = getString(R.string.label_error_prices)
-                        binding.checkboxLimitUsed.isChecked = false
+                        viewModel.calculated.value = false
                     }
                 } else if (binding.checkboxLimitUsedFully.isChecked) {
                     usedLimit = 300.0
@@ -83,8 +92,8 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                             val cargoPrice = binding.inputTextCargoPrice.text.toString().toDouble()
                             viewModel.calculate(itemPrice, usedLimit, cargoPrice)
                         } catch (e: NumberFormatException) {
-                            binding.inputLayoutCargoPrice.error =
-                                getString(R.string.label_error_prices)
+                            binding.inputLayoutCargoPrice.error = getString(R.string.label_error_prices)
+                            viewModel.calculated.value = false
                         }
                     }
                     "carrier" -> {
@@ -94,20 +103,18 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
                             if (carrierId != -1) {
                                 viewModel.calculate(itemPrice, usedLimit, cargoWeight, carrierId)
                             } else {
-                                Toast.makeText(
-                                    this.context,
-                                    R.string.toast_unselected_carrier,
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                Toast.makeText(this.context, R.string.toast_unselected_carrier, Toast.LENGTH_LONG).show()
+                                viewModel.calculated.value = false
                             }
                         } catch (e: NumberFormatException) {
-                            binding.inputLayoutItemWeight.error =
-                                getString(R.string.label_error_prices)
+                            binding.inputLayoutItemWeight.error = getString(R.string.label_error_prices)
+                            viewModel.calculated.value = false
                         }
                     }
                 }
             } catch (e: NumberFormatException) {
                 binding.inputLayoutItemPrice.error = getString(R.string.label_error_prices)
+                viewModel.calculated.value = false
             }
 
             if (sharedPreferences.getBoolean("clean", false)) {
@@ -222,8 +229,7 @@ class CalculateFragment : Fragment(), SaveDialog.DialogListener {
         })
 
         viewModel.tc.observe(viewLifecycleOwner, {
-            binding.labelTaxCollections.text =
-                getString(R.string.label_tax_collections, it.toDouble())
+            binding.labelTaxCollections.text = getString(R.string.label_tax_collections, it.toDouble())
         })
 
         viewModel.sf.observe(viewLifecycleOwner, {
