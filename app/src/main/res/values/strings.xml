@@ -28,6 +28,12 @@
     <string name="label_total">Total: %1$.2f ₼</string>
     <string name="label_total_price_to_pay">Total Price to Pay: %1$.2f ₼</string>
     <string name="label_cargo_price">Cargo price: %1$.2f $</string>
+    <string name="label_dialog_save_calculation">Calculation name</string>
+    <string name="label_dialog_save_calculation_message">Enter name for calculation</string>
+    <string name="label_dialog_save_calculation_save">Save</string>
+    <string name="label_dialog_save_calculation_cancel">Cancel</string>
+    <string name="label_dialog_hint_calculation_name">Calculation name</string>
+    <string name="snackbar_dialog_error">You entered unsupported name.</string>
     <string name="toast_unselected_carrier">You need to select a carrier for calculation.</string>
     <string name="button_calculate">Calculate</string>
     <string name="menu_item_settings">Settings</string>

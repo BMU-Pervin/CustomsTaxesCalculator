@@ -56,6 +56,10 @@ class CalculateViewModel : ViewModel() {
         value = MassUnit.KG
     }
 
+    var name = MutableLiveData<String>().apply {
+        value = null
+    }
+
     fun calculate(itemPrice: Double, usedLimit: Double, cargoPrice: Double) {
         _itemPrice.value = itemPrice
         _cargoPrice.value = cargoPrice

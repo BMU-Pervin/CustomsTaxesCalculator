@@ -17,9 +17,10 @@ import az.squareroot.customstaxescalc.R
 import az.squareroot.customstaxescalc.database.Carriers
 import az.squareroot.customstaxescalc.databinding.FragmentCalculateBinding
 import az.squareroot.customstaxescalc.hideKeyboard
+import com.google.android.material.snackbar.Snackbar
 
 
-class CalculateFragment : Fragment() {
+class CalculateFragment : Fragment(), SaveDialog.DialogListener {
 
     private lateinit var viewModel: CalculateViewModel
     private lateinit var binding: FragmentCalculateBinding
@@ -41,6 +42,12 @@ class CalculateFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.menu_item_settings -> {
                     navController.navigate(R.id.action_navigation_calculate_to_navigation_settings)
+                    true
+                }
+                R.id.menu_item_save -> {
+                    val dialog = SaveDialog()
+                    dialog.setTargetFragment(this, 0)
+                    dialog.show(parentFragmentManager, "SaveDialog")
                     true
                 }
                 else -> false
@@ -76,7 +83,8 @@ class CalculateFragment : Fragment() {
                             val cargoPrice = binding.inputTextCargoPrice.text.toString().toDouble()
                             viewModel.calculate(itemPrice, usedLimit, cargoPrice)
                         } catch (e: NumberFormatException) {
-                            binding.inputLayoutCargoPrice.error = getString(R.string.label_error_prices)
+                            binding.inputLayoutCargoPrice.error =
+                                getString(R.string.label_error_prices)
                         }
                     }
                     "carrier" -> {
@@ -86,10 +94,15 @@ class CalculateFragment : Fragment() {
                             if (carrierId != -1) {
                                 viewModel.calculate(itemPrice, usedLimit, cargoWeight, carrierId)
                             } else {
-                                Toast.makeText(this.context, R.string.toast_unselected_carrier, Toast.LENGTH_LONG).show()
+                                Toast.makeText(
+                                    this.context,
+                                    R.string.toast_unselected_carrier,
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
                         } catch (e: NumberFormatException) {
-                            binding.inputLayoutItemWeight.error = getString(R.string.label_error_prices)
+                            binding.inputLayoutItemWeight.error =
+                                getString(R.string.label_error_prices)
                         }
                     }
                 }
@@ -225,7 +238,28 @@ class CalculateFragment : Fragment() {
             binding.labelTotalPrice.text = getString(R.string.label_total_price_to_pay, it)
         })
 
+        viewModel.name.observe(viewLifecycleOwner, {
+
+            when {
+                it == null -> {
+
+                }
+                it.isEmpty() -> {
+                    Snackbar.make(binding.root, R.string.snackbar_dialog_error, Snackbar.LENGTH_LONG)
+                        .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
+                        .show()
+                }
+                else -> {
+                    Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
+
         return binding.root
+    }
+
+    override fun onFinishSaveDialog(name: String) {
+        viewModel.name.value = name
     }
 
     override fun onStop() {
