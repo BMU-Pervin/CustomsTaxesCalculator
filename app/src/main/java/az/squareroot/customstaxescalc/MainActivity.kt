@@ -65,7 +65,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onAdFailedToLoad(adError : LoadAdError) {
-                Log.i("MainActivity-Ad", "Ad Failed to Load ${adError.message}")
+                Log.i("MainActivity-Ad", "Ad Failed to Load:" +
+                        "\n\t${adError.message} " +
+                        "\n\tErrorCode=${adError.code} " +
+                        "\n\tHelp=${adError.cause}")
             }
 
             override fun onAdOpened() {
